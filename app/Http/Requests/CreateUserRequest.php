@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 
-class CreateUserRequest extends Request
+class CreateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,6 +27,7 @@ class CreateUserRequest extends Request
             'name' => 'required|max:255',
             'email' => 'required|email|max:255',
             'password' => 'required|min:6|confirmed',
+            'role' => 'required',
             'avatar' => "mimes:jpg,jpeg,png,gif,svg",
         ];
     }

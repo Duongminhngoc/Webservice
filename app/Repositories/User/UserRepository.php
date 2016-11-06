@@ -26,6 +26,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return User::create([
             'name' => $request['name'],
             'email' => $request['email'],
+            'role' => $request['role'],
             'avatar' => $fileName,
             'password' => bcrypt($request['password']),
         ]);
@@ -34,13 +35,16 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function update($inputs, $id)
     {
         try {
-            $inputs['password'] = Hash::make($inputs['password']);
-            $oldImage = Auth::user()->avatar;
+            // $inputs['password'] = Hash::make($inputs['password']);
+            // $oldImage = Auth::user()->avatar;
+            if(empty($inputs['password'])) {
+                unset($inputs['password']);
+            }
             if (isset($inputs['avatar'])) {
                 $image = $this->uploadAvatar($oldImage);
                 $inputs['avatar'] = $image;
             } else {
-                $inputs['avatar'] = $oldImage;
+                unset($inputs['avatar']);
             }
             $data = $this->model->where('id', $id)->update($inputs);
         } catch (Exception $e) {
@@ -64,5 +68,9 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         }
 
         return $fileName;
+    }
+    public function getUsers()
+    {
+        return $this->model->pluck('name', 'id')->toArray();
     }
 }

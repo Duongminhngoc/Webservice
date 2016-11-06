@@ -8,12 +8,12 @@
 
 <div class="form-group col-sm-6">
     {!! Form::label('type', trans('product.type')) !!}
-    {!! Form::text('product_type_id', null, ['class' => 'form-control']) !!}
+    {!! Form::select('product_type_id', trans('product.array_type'), null, array('class' => 'form-control selcls')) !!}
 </div>
 
 <div class="form-group col-sm-6">
     {!! Form::label('status', trans('product.status')) !!}
-    {!! Form::text('product_status_id', null, ['class' => 'form-control']) !!}
+    {!! Form::select('product_status_id', trans('product.array_status'), null, array('class' => 'form-control selcls')) !!}
 </div>
 
 <div class="form-group col-sm-6">

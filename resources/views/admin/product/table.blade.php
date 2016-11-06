@@ -12,12 +12,12 @@
     <tbody>
     @foreach($products as $product)
         <tr>
-            <td>{{ $product['id'] }}</td>
-            <td>{{ $product['product_type_id'] }}</td>
-            <td>{{ $product['product_status_id'] }}</td>
-            <td>{{ $product['name'] }}</td>
-            <td>{{ $product['price'] }}</td>
-            <td>{{ $product['quantity'] }} </td>
+            <td>{{ $product->id }}</td>
+            <td>{{ $product->product_type_id }}</td>
+            <td>{{ $product->product_status_id }}</td>
+            <td>{{ $product->name }}</td>
+            <td>{{ $product->price }}</td>
+            <td>{{ $product->quantity }} </td>
             <td><span></span><img src="{{ Request::root() }}/uploads/images/{!! $product['image'] !!}" width="80px" height="50px"></span></td>
             <td>
                 {!! Form::open(['url' => ['services/product', $product['id']], 'method' => 'delete']) !!}

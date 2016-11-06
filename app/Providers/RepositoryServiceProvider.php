@@ -5,20 +5,20 @@ use Illuminate\Support\ServiceProvider;
 use App;
 use App\Repositories\User\ProductRepository;
 use App\Repositories\User\ProductRepositoryInterface;
-use App\Repositories\Category\CategoryRepository;
-use App\Repositories\Category\CategoryRepositoryInterface;
-use App\Repositories\Lesson\LessonRepository;
-use App\Repositories\Lesson\LessonRepositoryInterface;
-use App\Repositories\Word\WordRepository;
-use App\Repositories\Word\WordRepositoryInterface;
-use App\Repositories\Result\ResultRepository;
-use App\Repositories\Result\ResultRepositoryInterface;
+use App\Repositories\Order\OrderRepository;
+use App\Repositories\Order\OrderRepositoryInterface;
+use App\Repositories\OrderItem\OrderItemRepository;
+use App\Repositories\OrderItem\OrderItemRepositoryInterface;
+use App\Repositories\Shipper\ShipperRepository;
+use App\Repositories\Shipper\ShipperRepositoryInterface;
+use App\Repositories\Shipment\ShipmentRepository;
+use App\Repositories\Shipment\ShipmentRepositoryInterface;
 use App\Repositories\UserShow\UserShowRepository;
 use App\Repositories\UserShow\UserShowRepositoryInterface;
-use App\Repositories\Relationship\RelationshipRepository;
-use App\Repositories\Relationship\RelationshipRepositoryInterface;
-use App\Repositories\Answer\AnswerRepository;
-use App\Repositories\Answer\AnswerRepositoryInterface;
+use App\Repositories\Restaurant\RestaurantRepository;
+use App\Repositories\Restaurant\RestaurantRepositoryInterface;
+use App\Repositories\OrderStatusCode\OrderStatusCodeRepository;
+use App\Repositories\OrderStatusCode\OrderStatusCodeRepositoryInterface;
 
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -40,12 +40,12 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         App::bind(ProductRepositoryInterface::class, ProductRepository::class);
-        App::bind(CategoryRepositoryInterface::class, CategoryRepository::class);
-        App::bind(LessonRepositoryInterface::class, LessonRepository::class);
-        App::bind(WordRepositoryInterface::class, WordRepository::class);
-        App::bind(ResultRepositoryInterface::class, ResultRepository::class);
+        App::bind(OrderRepositoryInterface::class, OrderRepository::class);
+        App::bind(OrderItemRepositoryInterface::class, OrderItemRepository::class);
+        App::bind(ShipperRepositoryInterface::class, ShipperRepository::class);
+        App::bind(ShipmentRepositoryInterface::class, ShipmentRepository::class);
         App::bind(UserShowRepositoryInterface::class, UserShowRepository::class);
-        App::bind(RelationshipRepositoryInterface::class, RelationshipRepository::class);
-        App::bind(AnswerRepositoryInterface::class, AnswerRepository::class);
+        App::bind(RestaurantRepositoryInterface::class, RestaurantRepository::class);
+        App::bind(OrderStatusCodeRepositoryInterface::class, OrderStatusCodeRepository::class);
     }
 }

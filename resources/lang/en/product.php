@@ -10,10 +10,21 @@
  	'quantity' => 'Quantity',
  	'description' => 'Description',
  	'image' => 'Image',
+ 	'other' => 'Other product detail',
  	'list_product' => 'List products',
  	'add_product' => 'Create',
  	'action' => 'Action',
  	'back' => 'Cancel',
  	'image_path' => '/public/uploads/images',
  	'detail_product' => 'Detail product',
- ];
+ 	'array_type' => array(
+ 			'1' => 'Type A',
+ 			'2' => 'Type B',
+ 		),
+ 	'array_status' => array(
+ 			'1' => 'Status A',
+ 			'2' => 'Status B',
+ 			'3' => 'Status C',
+ 			'4' => 'Status D',
+ 		),
+];

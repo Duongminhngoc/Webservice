@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{Request::root()}}/bower/bootstrap/dist/css/bootstrap.min.css">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -85,9 +86,12 @@
             </div>
         </nav>
 
+        
+    </div>
+    <div class="col-sm-12">
         @yield('content')
     </div>
-
+    
     <!-- Scripts -->
     <script src="/js/app.js"></script>
 </body>
