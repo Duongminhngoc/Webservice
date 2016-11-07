@@ -19,10 +19,10 @@ class ProductController extends Controller
     }
     public function index(Request $request)
     {	
-        // $products = json_decode(file_get_contents('http://localhost:8080/foodanddrink/public/services/product'), true);
-        // $products = collect($array['data']);
-
-        $products = $this->productRepository->all();
+        $array = json_decode(file_get_contents('http://localhost:8080/foodanddrink/public/services/product'), true);
+        $products = collect($array['data']);
+        
+        /*$products = $this->productRepository->all();*/
     	return view('admin.product.index', compact('products'));
     }
     public function create()

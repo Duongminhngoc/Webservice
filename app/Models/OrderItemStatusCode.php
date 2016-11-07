@@ -5,9 +5,9 @@ namespace App\Models;
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderStatusCode extends Model
+class OrderItemStatusCode extends Model
 {
-    protected $table = 'order_status_codes';
+    protected $table = 'order_item_status_codes';
     protected $fillable = ['status', 'description'];
 
     public function Orders()

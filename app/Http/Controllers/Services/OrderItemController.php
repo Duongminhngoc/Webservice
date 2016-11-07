@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\OrderItem\OrderItemRepository;
 use Response;
+use App\Models\OrderItem;
 
 class OrderItemController extends Controller
 {
@@ -16,8 +17,7 @@ class OrderItemController extends Controller
     }
     public function index()
     {
-    	$orderItems = $this->orderItemRepository->all();
-
+        $orderItems = OrderItem::with('product', 'orderItemStatusCode')->get();
     	
         if (!$orderItems) {
             return Response::json([

@@ -27,7 +27,7 @@ Route::group(['prefix' => 'admin'], function()
     Route::resource('shipper', 'Admin\ShipperController');
     Route::resource('shipment', 'Admin\ShipmentController');
     Route::resource('restaurant', 'Admin\RestaurantController');
-    Route::resource('orderStatus', 'Admin\OrderStatusController');
+    Route::resource('orderStatus', 'Admin\OrderItemStatusCodeController');
 });
 
 Route::group(['prefix' => 'services'], function()

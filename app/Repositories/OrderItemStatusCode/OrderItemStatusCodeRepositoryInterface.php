@@ -1,6 +1,6 @@
 <?php
-namespace App\Repositories\OrderStatusCode;
-interface OrderStatusCodeRepositoryInterface
+namespace App\Repositories\OrderItemStatusCode;
+interface OrderItemStatusCodeRepositoryInterface
 {
     public function count();
     public function all();

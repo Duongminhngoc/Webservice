@@ -4,7 +4,7 @@
     <section class="content-header">
         <h1 class="pull-left">{{ trans('restaurant.list_restaurant') }}</h1>
         <h1 class="pull-right">
-            <a class="btn btn-primary pull-right" href="{!! route('restaurant.create') !!}">{{ trans('restaurant.add_restaurant') }}</a>
+            <a class="btn btn-primary pull-right" href="{!! url('admin/restaurant/create') !!}">{{ trans('restaurant.add_restaurant') }}</a>
         </h1>
     </section>
     <div class="content">

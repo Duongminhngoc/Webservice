@@ -5,20 +5,22 @@ namespace App\Http\Controllers\Services;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Restaurant\RestaurantRepository;
+use App\Repositories\County\CountyRepository;
 use Response;
+use App\Models\Restaurant;
 
 class RestaurantController extends Controller
 {
     protected $restaurantRepository;
-	public function __construct(restaurantRepository $restaurantRepository)
+    protected $countyRepository;
+	public function __construct(RestaurantRepository $restaurantRepository, CountyRepository $countyRepository)
     {
         $this->restaurantRepository = $restaurantRepository;
+        $this->countyRepository = $countyRepository;
     }
     public function index()
     {
-    	$restaurants = $this->restaurantRepository->all();
-
-    	
+    	$restaurants = Restaurant::with('county', 'owner')->get();
         if (!$restaurants) {
             return Response::json([
                 'message' => 'Restaurant not found',
