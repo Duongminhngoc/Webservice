@@ -42,7 +42,7 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        $input = $request->only('name', 'email', 'role', 'avatar', 'password');
+        $input = $request->only('user_access_level_id', 'name', 'email', 'password', 'role', 'avatar', 'gender', 'phone', 'address');
         $user = $this->userRepository->create($input);
         Session::flash('msg', trans('user.create_user_successfully'));
 
@@ -96,7 +96,7 @@ class UserController extends Controller
             Session::flash('msg', trans('user.user_not_found'));
             return redirect(route('user.index'));
         }
-        $input = $request->only('name', 'email', 'role', 'avatar', 'password');
+        $input = $request->only('user_access_level_id', 'name', 'email', 'password', 'role', 'avatar', 'gender', 'phone', 'address');
         $user = $this->userRepository->update($input, $id);
         Session::flash('msg', trans('user.update_user_successfully'));
 

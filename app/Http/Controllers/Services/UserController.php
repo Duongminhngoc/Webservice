@@ -36,6 +36,23 @@ class UserController extends Controller
         }
     }
 
+    public function store(Request $request)
+    {
+        $input = $request->only('user_access_level_id', 'name', 'email', 'password', 'role', 'avatar', 'gender', 'phone', 'address');
+
+        if ($this->userRepository->create($input)) { 
+            return response()->json([
+                'message' => 'success',
+                'status' => true,
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'User not found',
+                'status' => false,
+            ]);
+        }
+    }
+
     public function show($id)
     {
         $user = $this->userRepository->find($id);
@@ -54,11 +71,11 @@ class UserController extends Controller
         }
     }
 
-    public function update($id, UpdateUserRequest $request)
+    public function update($id, Request $request)
     {
         $user = $this->userRepository->find($id);
         if ($user) { 
-            $input = $request->only('name', 'email', 'role', 'avatar', 'password');
+            $input = $request->only('user_access_level_id', 'name', 'email', 'password', 'role', 'avatar', 'gender', 'phone', 'address');
             $user = $this->userRepository->update($input, $id);
 
             return response()->json([
