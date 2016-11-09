@@ -53,4 +53,24 @@ class UserController extends Controller
             ]);
         }
     }
+
+    public function update($id, UpdateUserRequest $request)
+    {
+        $user = $this->userRepository->find($id);
+        if ($user) { 
+            $input = $request->only('name', 'email', 'role', 'avatar', 'password');
+            $user = $this->userRepository->update($input, $id);
+
+            return response()->json([
+                'message' => 'success',
+                'status' => true,
+                'data' => $user,
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Product not found',
+                'status' => false,
+            ]);
+        }
+    }
 }
