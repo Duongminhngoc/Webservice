@@ -85,7 +85,7 @@ class UserController extends Controller
             ]);
         } else {
             return response()->json([
-                'message' => 'Product not found',
+                'message' => 'User not found',
                 'status' => false,
             ]);
         }
