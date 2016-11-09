@@ -43,7 +43,7 @@ class ShipmentController extends Controller
             ]);
         } else {
             return response()->json([
-                'message' => 'shipment not found',
+                'message' => 'Shipment not found',
                 'status' => false,
             ]);
         }
@@ -81,7 +81,7 @@ class ShipmentController extends Controller
             ]);
         } else {
             return response()->json([
-                'message' => 'Order not found',
+                'message' => 'Shippment not found',
                 'status' => false,
             ]);
         }
@@ -99,7 +99,7 @@ class ShipmentController extends Controller
             ]);
         } else {
             return response()->json([
-                'message' => 'Order not found',
+                'message' => 'Shippment not found',
                 'status' => false,
             ]);
         }

@@ -37,4 +37,6 @@ Route::group(['prefix' => 'services'], function()
     Route::resource('orderItem', 'Services\OrderItemController');
     Route::resource('restaurant', 'Services\RestaurantController');
     Route::resource('shipment', 'Services\ShipmentController');
+    Route::resource('county', 'Services\CountyController');
+    Route::resource('user', 'Services\UserController');
 });

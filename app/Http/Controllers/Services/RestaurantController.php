@@ -20,7 +20,7 @@ class RestaurantController extends Controller
     }
     public function index()
     {
-    	$restaurants = Restaurant::with('county', 'owner')->get();
+    	$restaurants = Restaurant::with('county','owner')->get();
         if (!$restaurants) {
             return Response::json([
                 'message' => 'Restaurant not found',
@@ -45,7 +45,7 @@ class RestaurantController extends Controller
             ]);
         } else {
             return response()->json([
-                'message' => 'restaurant not found',
+                'message' => 'Restaurant not found',
                 'status' => false,
             ]);
         }
@@ -62,7 +62,7 @@ class RestaurantController extends Controller
             ]);
         } else {
             return response()->json([
-                'message' => 'Order item not found',
+                'message' => 'Restaurant item not found',
                 'status' => false,
             ]);
         }
@@ -83,7 +83,7 @@ class RestaurantController extends Controller
             ]);
         } else {
             return response()->json([
-                'message' => 'Order not found',
+                'message' => 'Restaurant not found',
                 'status' => false,
             ]);
         }
@@ -101,7 +101,7 @@ class RestaurantController extends Controller
             ]);
         } else {
             return response()->json([
-                'message' => 'Order not found',
+                'message' => 'Restaurant not found',
                 'status' => false,
             ]);
         }

@@ -14,10 +14,10 @@ class ShipperController extends Controller
     {
         $this->shipperRepository = $shipperRepository;
     }
+    
     public function index()
     {
     	$shippers = $this->shipperRepository->all();
-
     	
         if (!$shippers) {
             return Response::json([
@@ -43,7 +43,7 @@ class ShipperController extends Controller
             ]);
         } else {
             return response()->json([
-                'message' => 'shipper not found',
+                'message' => 'Shipper not found',
                 'status' => false,
             ]);
         }
@@ -60,7 +60,7 @@ class ShipperController extends Controller
             ]);
         } else {
             return response()->json([
-                'message' => 'Order item not found',
+                'message' => 'Shipper item not found',
                 'status' => false,
             ]);
         }
@@ -81,7 +81,7 @@ class ShipperController extends Controller
             ]);
         } else {
             return response()->json([
-                'message' => 'Order not found',
+                'message' => 'Shipper not found',
                 'status' => false,
             ]);
         }
@@ -99,7 +99,7 @@ class ShipperController extends Controller
             ]);
         } else {
             return response()->json([
-                'message' => 'Order not found',
+                'message' => 'Shipper not found',
                 'status' => false,
             ]);
         }
