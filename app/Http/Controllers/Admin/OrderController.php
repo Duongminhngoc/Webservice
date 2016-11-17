@@ -8,25 +8,26 @@ use App\Repositories\Order\OrderRepository;
 use App\Http\Requests\CreateOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use Session;
-use App\Repositories\OrderStatusCode\OrderStatusCodeRepository;
+use App\Repositories\OrderItemStatusCode\OrderItemStatusCodeRepository;
 
 class OrderController extends Controller
 {
 	protected $orderRepository;
-	public function __construct(OrderRepository $orderRepository,OrderStatusCodeRepository $orderStatusCodeRepository)
+	public function __construct(OrderRepository $orderRepository,OrderItemStatusCodeRepository $orderItemStatusCodeRepository)
     {
         $this->orderRepository = $orderRepository;
-        $this->orderStatusCodeRepository = $orderStatusCodeRepository;
+        $this->orderItemStatusCodeRepository = $orderItemStatusCodeRepository;
     }
     public function index()
     {
     	$orders = $this->orderRepository->all();
-    	return view('admin.order.index', compact('orders'));
+        $i=1;
+    	return view('admin.order.index', compact('orders','i'));
     }
     public function create()
     {   
 
-        $status = $this->orderStatusCodeRepository->getOrderStatusCode();
+        $status = $this->orderItemStatusCodeRepository->getOrderStatusCode();
     	return view('admin.order.create', compact('status'));
     }
     public function store(CreateOrderRequest $request)

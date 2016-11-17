@@ -5,25 +5,22 @@ namespace App\Http\Controllers\Services;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Product\ProductRepository;
-use App\Repositories\County\CountyRepository;
 use App\Http\Requests;
 use Response;
+use App\Models\Product;
 
 class ProductController extends Controller
 {	
 	protected $productRepository;
 
-	public function __construct(ProductRepository $productRepository, CountyRepository $countyRepository)
+	public function __construct(ProductRepository $productRepository)
     {
         $this->productRepository = $productRepository;
-        $this->countyRepository = $countyRepository;
     }
 
     public function index()
     {	
-    	$products = $this->productRepository->all();
-        $county = $this->countyRepository->all();
-
+    	$products = Product::with('productType')->get();
     	
         if (!$products) {
             return Response::json([
@@ -34,7 +31,6 @@ class ProductController extends Controller
             return Response::json([
                 'message' => 'success',
                 'data' => $products,
-                'date1' => $county,
                 'status' => true,
             ]);
         }
@@ -78,7 +74,6 @@ class ProductController extends Controller
     public function update($id, Request $request)
     {
         $product = $this->productRepository->find($id);
-        
         if ($product) { 
             $input = $request->only('name', 'price', 'quantity', 'description', 'product_type_id', 'product_status_id', 'other_product_details', 'image');
             $product = $this->productRepository->update($input, $id);

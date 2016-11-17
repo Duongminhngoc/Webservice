@@ -1,3 +1,18 @@
+<script>
+        function confirmDelete(id){
+            bootbox.confirm("Are you sure?", function(result) {
+                if(result) $("#delete-shipper-"+id).submit();
+            });
+        }
+</script>
+<script>
+    @if (Session::has('msg'))
+
+        bootbox.alert("{{ Session::get('msg') }}");
+
+    @endif
+</script>
+<div class="table-responsive">
 <table class="table table-responsive" id="shipper-table">
     <thead>
         <th>{{ trans('shipper.id') }}</th>
@@ -15,16 +30,19 @@
             <td>{{ $shipper->phone }}</td>
             <td>{{ $shipper->address }} </td>
             <td>{{ $shipper->status_id }} </td>
-            <td>
-                {!! Form::open(['route' => ['shipper.destroy', $shipper->id], 'method' => 'delete']) !!}
-                <div class='btn-group'>
-                    <a href="{!! route('shipper.show', [$shipper->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                    <a href="{!! route('shipper.edit', [$shipper->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                </div>
-                {!! Form::close() !!}
+            <td class="text-right" width="3%">
+                <a href="{{ route('shipper.edit',$shipper['id'])}}" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
+            </td>
+            <td class="text-right" width="3%">
+                <a onclick="confirmDelete({{$shipper['id']}});" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
+                    <form id="delete-shipper-{{$shipper['id']}}" style="display:none;" role="form" action="{{ route('shipper.destroy', $shipper['id']) }}" method="post">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                    </form>
+        
             </td>
         </tr>
     @endforeach
     </tbody>
 </table>
+</div>

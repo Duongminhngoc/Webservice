@@ -17,7 +17,21 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home','HomeController@index');
+Route::get('/logout', 'Auth\LoginController@logout');
+Route::group(['middleware' => ['auth']], function() {
+Route::get('/admin', 'HomeController@admin');
+Route::group(['prefix' => 'services'], function()
+{
+    Route::resource('shipper', 'Services\ShipperController');
+    Route::resource('product', 'Services\ProductController');
+    Route::resource('orderItem', 'Services\OrderItemController');
+    Route::resource('restaurant', 'Services\RestaurantController');
+    Route::resource('shipment', 'Services\ShipmentController');
+    Route::resource('county', 'Services\CountyController');
+    Route::resource('user', 'Services\UserController');
+});
+
 Route::group(['prefix' => 'admin'], function()
 {
     Route::resource('product', 'Admin\ProductController');
@@ -27,14 +41,7 @@ Route::group(['prefix' => 'admin'], function()
     Route::resource('shipper', 'Admin\ShipperController');
     Route::resource('shipment', 'Admin\ShipmentController');
     Route::resource('restaurant', 'Admin\RestaurantController');
-    Route::resource('orderStatus', 'Admin\OrderStatusController');
+    Route::resource('orderStatus', 'Admin\OrderItemStatusCodeController');
+});
 });
 
-Route::group(['prefix' => 'services'], function()
-{
-    Route::resource('shipper', 'Services\ShipperController');
-    Route::resource('product', 'Services\ProductController');
-    Route::resource('orderItem', 'Services\OrderItemController');
-    Route::resource('restaurant', 'Services\RestaurantController');
-    Route::resource('shipment', 'Services\ShipmentController');
-});

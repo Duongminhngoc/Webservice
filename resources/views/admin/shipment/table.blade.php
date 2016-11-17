@@ -1,3 +1,18 @@
+<script>
+        function confirmDelete(id){
+            bootbox.confirm("Are you sure?", function(result) {
+                if(result) $("#delete-shipment-"+id).submit();
+            });
+        }
+</script>
+<script>
+    @if (Session::has('msg'))
+
+        bootbox.alert("{{ Session::get('msg') }}");
+
+    @endif
+</script>
+<div class="table-responsive">
 <table class="table table-responsive" id="shipment-table">
     <thead>
         <th>{{ trans('shipment.id') }}</th>
@@ -14,20 +29,23 @@
     @foreach($shipments as $shipment)
         <tr>
             <td>{{ $shipment->id }}</td>
-            <td>{{ $shipment->name }}</td>
-            <td>{{ $shipment->email }}</td>
-            <td>{{ $shipment->role === 0 ? "shipment" : "Admin" }} </td>
-            <td><span></span><img src="{{ Request::root() }}/uploads/images/{!! $shipment->avatar !!}" width="80px" height="50px"></span></td>
-            <td>
-                {!! Form::open(['route' => ['shipment.destroy', $shipment->id], 'method' => 'delete']) !!}
-                <div class='btn-group'>
-                    <a href="{!! route('shipment.show', [$shipment->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                    <a href="{!! route('shipment.edit', [$shipment->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                </div>
-                {!! Form::close() !!}
+            <td>{{ $shipment->shipper_id }}</td>
+            <td>{{ $shipment->shipment_status_id }}</td>
+            <td>{{ $shipment->invoice_id }} </td>
+            <td>{{ $shipment->tracking_number }}</td>
+            <td>{{ $shipment->datetime_start }}</td>
+            <td>{{ $shipment->datetime_end }}</td>
+            <td>{{ $shipment->other_shipment_details }}</td>
+            <td class="text-right" width="3%">
+                <a onclick="confirmDelete({{$shipment['id']}});" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
+                    <form id="delete-shipment-{{$shipment['id']}}" style="display:none;" role="form" action="{{ route('shipment.destroy', $shipment['id']) }}" method="post">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                    </form>
+        
             </td>
         </tr>
     @endforeach
     </tbody>
 </table>
+</div>

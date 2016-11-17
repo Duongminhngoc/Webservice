@@ -1,6 +1,21 @@
+<script>
+        function confirmDelete(id){
+            bootbox.confirm("Are you sure?", function(result) {
+                if(result) $("#delete-product-"+id).submit();
+            });
+        }
+</script>
+<script>
+    @if (Session::has('msg'))
+
+        bootbox.alert("{{ Session::get('msg') }}");
+
+    @endif
+</script>
+<div class="table-responsive">
 <table class="table table-responsive" id="products-table">
     <thead>
-        <th>{{ trans('product.id') }}</th>
+        <th>No</th>
         <th>{{ trans('product.type') }}</th>
         <th>{{ trans('product.status') }}</th>
         <th>{{ trans('product.name') }}</th>
@@ -12,26 +27,29 @@
     <tbody>
     @foreach($products as $product)
         <tr>
-            <td>{{ $product->id }}</td>
-            <td>{{ $product->product_type_id }}</td>
-            <td>{{ $product->product_status_id }}</td>
-            <td>{{ $product->name }}</td>
-            <td>{{ $product->price }}</td>
-            <td>{{ $product->quantity }} </td>
-            <td><span></span><img src="{{ Request::root() }}/uploads/images/{!! $product['image'] !!}" width="80px" height="50px"></span></td>
-            <td>
-                {!! Form::open(['url' => ['services/product', $product['id']], 'method' => 'delete']) !!}
-                <div class='btn-group'>
-                    @php
-                        $productId = $product['id'];
-                    @endphp
-                    <a href="{!! url('admin/product', [$product['id']]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                    <a href='{!! url("admin/product/$productId/edit") !!}' class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                </div>
-                {!! Form::close() !!}
+            <td>{{ $i++}}</td>
+            <td>{{ $product['product_type_id'] }}</td>
+            <td>{{ $product['product_status_id'] }}</td>
+            <td>{{ $product['name'] }}</td>
+            <td>{{ $product['price'] }}</td>
+            <td>{{ $product['quantity'] }} </td>
+            <td><span></span><img src="{{ url('/') }}/uploads/images/{!! $product['image'] !!}" width="80px" height="50px"></span></td>
+            <!-- <td class="text-right" width="3%">
+                <a class="btn btn-primary" href="{{ route('product.show',$product['id']) }}"><i class="glyphicon glyphicon-eye-open"></i></a>
+            </td> -->
+            <td class="text-right" width="3%">
+                <a href="{{ route('product.edit',$product['id'])}}" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
+            </td>
+            <td class="text-right" width="3%">
+                <a onclick="confirmDelete({{$product['id']}});" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
+                    <form id="delete-product-{{$product['id']}}" style="display:none;" role="form" action="{{ route('product.destroy', $product['id']) }}" method="post">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                    </form>
+        
             </td>
         </tr>
     @endforeach
     </tbody>
 </table>
+</div>

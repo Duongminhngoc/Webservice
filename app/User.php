@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'avatar'
+        'user_access_level', 'name', 'email', 'password', 'city', 'avatar', 'gender', 'phone_number', 'address',
     ];
 
     /**
@@ -31,6 +31,6 @@ class User extends Authenticatable
 
     public function restaurants()
     {
-        return $this->hasMany(Restaurant::class);
+        return $this->hasMany(Restaurant::class,'owner_id','id');
     }
 }

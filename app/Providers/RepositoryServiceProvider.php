@@ -17,8 +17,10 @@ use App\Repositories\UserShow\UserShowRepository;
 use App\Repositories\UserShow\UserShowRepositoryInterface;
 use App\Repositories\Restaurant\RestaurantRepository;
 use App\Repositories\Restaurant\RestaurantRepositoryInterface;
-use App\Repositories\OrderStatusCode\OrderStatusCodeRepository;
-use App\Repositories\OrderStatusCode\OrderStatusCodeRepositoryInterface;
+use App\Repositories\OrderItemStatusCode\OrderItemStatusCodeRepository;
+use App\Repositories\OrderItemStatusCode\OrderItemStatusCodeRepositoryInterface;
+use App\Repositories\County\CountyRepository;
+use App\Repositories\County\CountyRepositoryInterface;
 
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -46,6 +48,7 @@ class RepositoryServiceProvider extends ServiceProvider
         App::bind(ShipmentRepositoryInterface::class, ShipmentRepository::class);
         App::bind(UserShowRepositoryInterface::class, UserShowRepository::class);
         App::bind(RestaurantRepositoryInterface::class, RestaurantRepository::class);
-        App::bind(OrderStatusCodeRepositoryInterface::class, OrderStatusCodeRepository::class);
+        App::bind(OrderItemStatusCodeRepositoryInterface::class, OrderItemStatusCodeRepository::class);
+        App::bind(ItemRepositoryInterface::class, ItemRepository::class);
     }
 }

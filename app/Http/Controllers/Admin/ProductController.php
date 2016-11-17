@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Session;
+use App\Models\ProductType;
 
 class ProductController extends Controller
 {	
@@ -19,11 +20,12 @@ class ProductController extends Controller
     }
     public function index(Request $request)
     {	
-        // $products = json_decode(file_get_contents('http://localhost:8080/foodanddrink/public/services/product'), true);
-        // $products = collect($array['data']);
-
+        //$array = json_decode(file_get_contents(url('/').'/services/product'), true);
+        //$products = collect($array['data']);
+        //dd($products);
+        $i=1;
         $products = $this->productRepository->all();
-    	return view('admin.product.index', compact('products'));
+    	return view('admin.product.index', compact('products','i'));
     }
     public function create()
     {
@@ -32,17 +34,29 @@ class ProductController extends Controller
     
     public function edit($id)
     {
-        $array = json_decode(file_get_contents("http://localhost:8080/foodanddrink/public/services/product/$id"), true);
-        $product = collect($array['data']);
-
+        //$array = json_decode(file_get_contents(url('/')."/services/product/$id"), true);
+        //$product = collect($array['data']);
+        $product = $this->productRepository->find($id);
         return view('admin.product.edit', compact('product'));
     }
 
     public function show($id)
     {
-        $array = json_decode(file_get_contents("http://localhost:8080/foodanddrink/public/services/product/$id"), true);
+        $array = json_decode(file_get_contents(url('/')."/services/product/$id"), true);
         $product = collect($array['data']);
 
         return view('admin.product.show_fields', compact('product'));
+    }
+    public function destroy($id)
+    {
+        $product = $this->productRepository->find($id);
+        if (empty($product)) {
+            Session::flash('msg', trans('product.product_not_found'));
+            return redirect(route('product.index'));
+        }
+        $this->productRepository->delete($id);
+        Session::flash('msg', trans('product.delete_product_successfully'));
+
+        return redirect(route('product.index'));
     }
 }

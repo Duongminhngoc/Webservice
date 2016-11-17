@@ -8,7 +8,7 @@
         <div class="box box-primary">
             <div class="box-body">
                 <div class="row">
-                    {{ Form::model($product, ['url' => ['services/product', $product['id']], 'method' => 'PUT', 'files' => true]) }}
+                    {{ Form::model($product, array('route' => array('product.update', $product['id']), 'method' => 'PUT', 'files' => true)) }}
 
                         @include('admin.product.fields')
 

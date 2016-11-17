@@ -11,6 +11,7 @@ use App\Http\Requests\UpdateRestaurantRequest;
 use Session;
 use App\Repositories\County\CountyRepository;
 use App\Repositories\User\UserRepository;
+use App\Models\Restaurant;
 
 class RestaurantController extends Controller
 {
@@ -23,8 +24,12 @@ class RestaurantController extends Controller
     }
     public function index()
     {	
-    	$restaurants = $this->restaurantRepository->all();
-    	return view('admin.restaurant.index', compact('restaurants'));
+        //$array = json_decode(file_get_contents(url('/').'/services/restaurant'), true);
+        //$restaurants = collect($array['data']);
+        //dd($restaurants);
+        $restaurants = Restaurant::with('county','owner')->get();
+        $i=1;
+    	return view('admin.restaurant.index', compact('restaurants','i'));
     }
     public function create()
     {
