@@ -17,6 +17,6 @@ class OrderItemStatusCodeController extends Controller
     public function index()
     {
     	$orderItemStatusCode = OrderItemStatusCode::all();
-    	dd($orderItemStatusCode);
+    	//dd($orderItemStatusCode);
     }
 }

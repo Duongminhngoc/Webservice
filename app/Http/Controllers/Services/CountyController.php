@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\County\CountyRepository;
 use Response;
-use App\Models\County;
+use App\Models\Country;
 
 class CountyController extends Controller
 {

@@ -37,7 +37,6 @@ class RestaurantController extends Controller
     public function store(Request $request)
     {
     	$input = $request->only('name', 'county_id', 'owner_id', 'phone', 'email', 'address', 'description');
-
         if ($this->restaurantRepository->create($input)) { 
             return response()->json([
                 'message' => 'success',

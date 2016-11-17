@@ -24,11 +24,12 @@ class RestaurantController extends Controller
     }
     public function index()
     {	
-        $array = json_decode(file_get_contents('http://localhost:8080/foodanddrink/public/services/restaurant'), true);
-        $restaurants = collect($array['data']);
-        dd($restaurants);
-        // $restaurants = Restaurant::with('county')->get();
-    	return view('admin.restaurant.index', compact('restaurants'));
+        //$array = json_decode(file_get_contents(url('/').'/services/restaurant'), true);
+        //$restaurants = collect($array['data']);
+        //dd($restaurants);
+        $restaurants = Restaurant::with('county','owner')->get();
+        $i=1;
+    	return view('admin.restaurant.index', compact('restaurants','i'));
     }
     public function create()
     {

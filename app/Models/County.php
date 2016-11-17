@@ -7,7 +7,7 @@ use App\Models\City;
 
 class County extends Model
 {
-    protected $table = 'counties';
+    protected $table = 'county';
 	protected $fillable = ['city_id', 'name'];
 
     public function restaurants()

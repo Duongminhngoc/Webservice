@@ -1,34 +1,51 @@
+<script>
+        function confirmDelete(id){
+            bootbox.confirm("Are you sure?", function(result) {
+                if(result) $("#delete-order-"+id).submit();
+            });
+        }
+</script>
+<script>
+    @if (Session::has('msg'))
+
+        bootbox.alert("{{ Session::get('msg') }}");
+
+    @endif
+</script>
+<div class="table-responsive">
 <table class="table table-responsive" id="order-table">
     <thead>
-        <th>{{ trans('order.id') }}</th>
-        <th>{{ trans('order.user_id') }}</th>
-        <th>{{ trans('order.order_status_code') }}</th>
-        <th>{{ trans('order.details') }}</th>
-        <th>{{ trans('order.action') }}</th>
+        <th>No</th>
+        <th>User Order </th>
+        <th>Status</th>
+        <th>Date Order</th>
+        <th>Details</th>
+        <th></th>
     </thead>
     <tbody>
     @foreach($orders as $order)
         <tr>
-            <td>{{ $order['id'] }}</td>
-            <td>{{ $order->user->name }}</td>
+            <td>{{ $i++ }}</td>
+            <td>{{ $order['user_id'] }}</td>
             <td>
-            @if($order->order_status_code == 1)
+            @if($order['order_status_code'] == 1)
                 <p>Đã giao hàng  <button><i style="color:green" class="glyphicon glyphicon-ok"></i></button></p>
             @else
                 <p>Chưa giao hàng  <button><i style="color:red" class="glyphicon glyphicon-remove"></button></i></p>
             @endif
             </td>
-            <td>{{ $order->details }} </td>
-            <td>
-                {!! Form::open(['route' => ['order.destroy', $order->id], 'method' => 'delete']) !!}
-                <div class='btn-group'>
-                    <a href="{!! route('order.show', [$order->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                    <a href="{!! route('order.edit', [$order->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                </div>
-                {!! Form::close() !!}
+            <td>{{ $order['date_order_place'] }} </td>
+            <td>{{ $order['details'] }} </td>
+            <td class="text-right" width="3%">
+                <a onclick="confirmDelete({{$order['id']}});" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
+                    <form id="delete-order-{{$order['id']}}" style="display:none;" role="form" action="{{ route('order.destroy', $order['id']) }}" method="post">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                    </form>
+        
             </td>
         </tr>
     @endforeach
     </tbody>
 </table>
+</button>

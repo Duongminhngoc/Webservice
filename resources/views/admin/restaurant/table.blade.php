@@ -1,39 +1,59 @@
+<script>
+        function confirmDelete(id){
+            bootbox.confirm("Are you sure?", function(result) {
+                if(result) $("#delete-restaurant-"+id).submit();
+            });
+        }
+</script>
+<script>
+    @if (Session::has('msg'))
+
+        bootbox.alert("{{ Session::get('msg') }}");
+
+    @endif
+</script>
+<div class="table-responsive">
 <table class="table table-responsive" id="restaurant-table">
     <thead>
-        <th>{{ trans('restaurant.id') }}</th>
-        <th>{{ trans('restaurant.name') }}</th>
-        <th>{{ trans('restaurant.county_id') }}</th>
-        <th>{{ trans('restaurant.owner_id') }}</th>
-        <th>{{ trans('restaurant.phone') }}</th>
-        <th>{{ trans('restaurant.email') }}</th>
-        <th>{{ trans('restaurant.address') }}</th>
-        <th>{{ trans('restaurant.description') }}</th>
-        <th>{{ trans('restaurant.action') }}</th>
+        <th>No</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Description</th>
+        <th>Belong to user</th>
+        <th ></th>
+        <th ></th>
     </thead>
     <tbody>
     @foreach($restaurants as $restaurant)
         <tr>
-            <td>{{ $restaurant['id'] }}</td>
+            <td>{{$i++}}</td>
             <td>{{ $restaurant['name'] }}</td>
-            <td>{{ $restaurant['county'] }}</td>
-            <td>{{ $restaurant['owner_id'] }}</td>
-            <td>{{ $restaurant['phone'] }}</td>
-            <td>{{ $restaurant['email'] }}</td>
-            <td>{{ $restaurant['address'] }}</td>
-            <td>{{ $restaurant['description'] }}</td>
+            <td>{{ $restaurant['phone']}}</td>
+            <td>{{ $restaurant['email']}}</td>
+            <td>{{ $restaurant['address']}}</td>
+            <td>{{ $restaurant['description']}}</td>
             <td>
-                {!! Form::open(['route' => ['restaurant.destroy', $restaurant['id']], 'method' => 'delete']) !!}
-                <div class='btn-group'>
-                @php
-                        $restaurantId = $restaurant['id'];
-                    @endphp
-                    <a href="{!! route('restaurant.show', [$restaurant['id']]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                    <a href='{!! url("admin/restaurant/$restaurantId/edit") !!}' class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                </div>
-                {!! Form::close() !!}
+                <a href="{{route('user.show',$restaurant['owner']['id'])}}"><strong>{{ $restaurant['owner']['name']}}</strong>
+                </a>
+            </td>
+            <!-- <td class="text-right" width="3%">
+                <a class="btn btn-primary" href="{{ route('restaurant.show',$restaurant['id']) }}"><i class="glyphicon glyphicon-eye-open"></i></a>
+            </td> -->
+            <td class="text-right" width="3%">
+                <a href="{{ route('restaurant.edit',$restaurant['id'])}}" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
+            </td>
+            <td class="text-right" width="3%">
+                <a onclick="confirmDelete({{$restaurant['id']}});" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
+                    <form id="delete-restaurant-{{$restaurant['id']}}" style="display:none;" role="form" action="{{ route('restaurant.destroy', $restaurant['id']) }}" method="post">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                    </form>
+        
             </td>
         </tr>
     @endforeach
     </tbody>
 </table>
+</div>

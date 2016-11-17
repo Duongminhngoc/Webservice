@@ -26,9 +26,13 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return User::create([
             'name' => $request['name'],
             'email' => $request['email'],
-            'role' => $request['role'],
+            'user_access_level' => $request['user_access_level'],
             'avatar' => $fileName,
             'password' => bcrypt($request['password']),
+            'phone_number' => $request['phone_number'],
+            'address' => $request['address'],
+            'city' => $request['city'],
+            'gender' => $request['gender'],
         ]);
     }
 

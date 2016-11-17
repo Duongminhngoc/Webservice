@@ -38,7 +38,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $input = $request->only('user_access_level_id', 'name', 'email', 'password', 'role', 'avatar', 'gender', 'phone', 'address');
+        $input = $request->only('user_access_level', 'name', 'email', 'password', 'city', 'avatar', 'gender', 'phone_number', 'address');
 
         if ($this->userRepository->create($input)) { 
             return response()->json([
@@ -75,7 +75,7 @@ class UserController extends Controller
     {
         $user = $this->userRepository->find($id);
         if ($user) { 
-            $input = $request->only('user_access_level_id', 'name', 'email', 'password', 'role', 'avatar', 'gender', 'phone', 'address');
+            $input = $request->only('user_access_level', 'name', 'email', 'password', 'city', 'avatar', 'gender', 'phone_number', 'address');
             $user = $this->userRepository->update($input, $id);
 
             return response()->json([

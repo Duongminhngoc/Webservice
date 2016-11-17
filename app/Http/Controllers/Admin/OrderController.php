@@ -21,7 +21,8 @@ class OrderController extends Controller
     public function index()
     {
     	$orders = $this->orderRepository->all();
-    	return view('admin.order.index', compact('orders'));
+        $i=1;
+    	return view('admin.order.index', compact('orders','i'));
     }
     public function create()
     {   

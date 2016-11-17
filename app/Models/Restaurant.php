@@ -14,10 +14,10 @@ class Restaurant extends Model
 
     public function county()
 	{
-	    return $this->belongsTo(County::class);
+	    return $this->belongsTo(County::class,'city_id','id');
 	}
 	public function owner()
 	{
-		return $this->belongsTo(User::class);
+		return $this->belongsTo(User::class,'owner_id','id');
 	}
 }

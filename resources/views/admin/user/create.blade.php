@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1>{{ trans('user.user') }}</h1>
+        <h1>Create User</h1>
     </section>
     <div class="content">
         <div class="box box-primary">

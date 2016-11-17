@@ -36,13 +36,13 @@
                          </div>
 
                          <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
-                             {{ Form::label('role', trans('label.role'), ['class' => 'col-md-4 control-label']) }}
+                             {{ Form::label('user_access_level', trans('label.user_access_level'), ['class' => 'col-md-4 control-label']) }}
                             <div class="col-md-6">
-                                 {{ Form::text('role', null,['class'=>'form-control']) }}
+                                 {{ Form::text('user_access_level', null,['class'=>'form-control']) }}
 
-                                 @if ($errors->has('role'))
+                                 @if ($errors->has('user_access_level'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('role') }}</strong>
+                                        <strong>{{ $errors->first('user_access_level') }}</strong>
                                     </span>
                                   @endif
                               </div>
@@ -75,7 +75,7 @@
                          </div>
 
                          <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                         {{ Form::label('email', trans('label.confirm_password'), ['class' => 'col-md-4 control-label']) }}
+                         {{ Form::label('password', trans('label.confirm_password'), ['class' => 'col-md-4 control-label']) }}
                              <div class="col-md-6">
                              {{ Form::password('password', ['class'=>'form-control', 'name'=>'password_confirmation']) }}
 

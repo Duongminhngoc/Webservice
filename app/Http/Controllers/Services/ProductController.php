@@ -74,7 +74,6 @@ class ProductController extends Controller
     public function update($id, Request $request)
     {
         $product = $this->productRepository->find($id);
-        
         if ($product) { 
             $input = $request->only('name', 'price', 'quantity', 'description', 'product_type_id', 'product_status_id', 'other_product_details', 'image');
             $product = $this->productRepository->update($input, $id);

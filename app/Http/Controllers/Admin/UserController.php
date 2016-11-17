@@ -9,7 +9,8 @@ use App\Http\Requests;
 use Session;
 use App\Http\Controllers\Controller;
 use App\Repositories\User\UserRepository;
-
+use App\Models\Restaurant;
+use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     protected $userRepository;
@@ -21,8 +22,8 @@ class UserController extends Controller
      public function index()
     {
         $users = $this->userRepository->paginate(trans('user.limit'));
-
-        return view('admin.user.index', compact('users'));
+        $i=1;
+        return view('admin.user.index', compact('users','i'));
     }
 
     /**
@@ -42,7 +43,7 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        $input = $request->only('user_access_level_id', 'name', 'email', 'password', 'role', 'avatar', 'gender', 'phone', 'address');
+        $input = $request->only('user_access_level', 'name', 'email', 'password', 'city', 'avatar', 'gender', 'phone_number', 'address');
         $user = $this->userRepository->create($input);
         Session::flash('msg', trans('user.create_user_successfully'));
 
@@ -58,12 +59,15 @@ class UserController extends Controller
     public function show($id)
     {
         $user = $this->userRepository->find($id);
+        //$users=Restaurant::find('owner_id',$id)->get();
+        $u=DB::table('restaurants')->where('owner_id', $id);
+        //sdd($u);
         if (empty($user)) {
             Session::flash('msg', trans('user.user_not_found'));
             return redirect(route('user.index'));
         }
 
-        return view('admin.user.show')->with('user', $user);
+        return view('admin.user.show',compact('u'))->with('user', $user);
     }
 
     /**
@@ -96,7 +100,7 @@ class UserController extends Controller
             Session::flash('msg', trans('user.user_not_found'));
             return redirect(route('user.index'));
         }
-        $input = $request->only('user_access_level_id', 'name', 'email', 'password', 'role', 'avatar', 'gender', 'phone', 'address');
+        $input = $request->only('user_access_level', 'name', 'email', 'password', 'city', 'avatar', 'gender', 'phone_number', 'address');
         $user = $this->userRepository->update($input, $id);
         Session::flash('msg', trans('user.update_user_successfully'));
 
