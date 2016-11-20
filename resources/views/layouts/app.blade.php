@@ -15,10 +15,11 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="{{ URL::asset('css/jquery-ui.min.css')}}">
     <script src="{{ URL::asset('js/jquery-2.1.1.min.js')}}" ></script>
-    <script src="{{ URL::asset('js/jquery-ui.min.js')}}" ></script>
     <script src="{{ URL::asset('js/bootstrap.js')}}"></script>
+    <script src="{{ URL::asset('js/jquery-ui.min.js')}}" ></script>
     <script src="{{ URL::asset('js/bootbox.js')}}"></script>
     <script src="{{ URL::asset('js/ckeditor.js')}}"></script>
+    
 </head>
 <body id="app-layout" style='background-color:#{{$background or "fff"}}'>
     <nav class="navbar navbar-default navbar-static-top" style='background-color:#{{$nav or "62b896"}}'>

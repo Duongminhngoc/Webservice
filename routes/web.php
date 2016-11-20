@@ -14,9 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/demo','HomeController@demoo');
 Auth::routes();
-
+Route::get('/ajaxRestaurant/{country_id}','HomeController@ajaxRestaurant');
+Route::post('restaurant',['as'=>'restaurant.search','uses'=>'Admin\RestaurantController@search']);
+Route::get('theme',['as'=>'theme.get','uses'=>'ThemeController@getTheme']);
 Route::get('/home','HomeController@index');
 Route::get('/logout', 'Auth\LoginController@logout');
 Route::group(['middleware' => ['auth']], function() {

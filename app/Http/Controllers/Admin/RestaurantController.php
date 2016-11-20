@@ -12,6 +12,8 @@ use Session;
 use App\Repositories\County\CountyRepository;
 use App\Repositories\User\UserRepository;
 use App\Models\Restaurant;
+use App\Models\Product;
+use App\Models\County;
 
 class RestaurantController extends Controller
 {
@@ -83,5 +85,14 @@ class RestaurantController extends Controller
         Session::flash('msg', trans('restaurant.delete_restaurant_successfully'));
 
         return redirect(route('restaurant.index'));
+    }
+    public function search(Request $request){
+         $input = $request->all();
+         $restaurant=Restaurant::where('id','=',$input['country'])->get();
+         $products=Product::where('restaurant_id','=',$input['restaurant'])->get();
+         $restaurant_name=$restaurant[0]['name'];
+         $countries = County::all();
+         $restaurant1=$countries[0]->restaurants->toArray();
+         return view('home.restaurant',compact('countries','products','restaurant_name','restaurant1','j'));
     }
 }

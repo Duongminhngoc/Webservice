@@ -20,4 +20,8 @@ class Restaurant extends Model
 	{
 		return $this->belongsTo(User::class,'owner_id','id');
 	}
+    public function product()
+    {
+        return $this->hasMany(Product::class,'restaurant_id','id');
+    }
 }

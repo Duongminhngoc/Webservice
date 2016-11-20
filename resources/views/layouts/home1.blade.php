@@ -5,25 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Home</title>
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/mystyle.css')}}"> -->
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/common.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/font-awesome.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/hover.css')}}">
+    <title>Food And Drink</title>
+
+    <!-- Fonts -->
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/bootstrap.css')}}">
+<!--     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/style.css')}}"> -->
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/login.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/signup.css')}}">
-    <!--JS-->
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/common.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/font-awesome.css')}}">
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"> -->
+    <link rel="stylesheet" href="{{ URL::asset('css/jquery-ui.min.css')}}">
     <script src="{{ URL::asset('js/jquery-2.1.1.min.js')}}" ></script>
-    <script src="{{ URL::asset('js/jquery-ui.min.js')}}"></script>
     <script src="{{ URL::asset('js/bootstrap.js')}}"></script>
-    <script src="{{ URL::asset('js/common.js')}}"></script>
-    <script src="{{ URL::asset('js/bars.js')}}"></script>
+    <script src="{{ URL::asset('js/jquery-ui.min.js')}}" ></script>
     <script src="{{ URL::asset('js/bootbox.js')}}"></script>
     <script src="{{ URL::asset('js/ckeditor.js')}}"></script>
-    <script src="{{ URL::asset('js/jquery.nicescroll.js')}}"></script>
-    <style>
+<style>
  div #map-canvas {
     height: 250px;
     margin-top:10px;
@@ -64,7 +63,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         
-        <li><a href="{{url('/home')}}">Food and Drink</a></li>
+        <li><a href="{{url('/home')}}" >Food and Drink</a></li>
       </ul>
        <ul class="nav navbar-nav navbar-right">
         <li><a href="#" data-toggle="modal" class="login"><h4>Login</h4></a></li>
@@ -79,13 +78,14 @@
             $('#SignUp').modal('show');
         });
       </script>
-    
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<!--body-->
 <div class="container background">
 </br>
-  @yield('content')
+    @yield('content')
 </br>
 </div>
 <nav class="navbar navbar-default navbar-bottom footer-border" role="navigation">
@@ -100,3 +100,4 @@
 @include('layouts.modal')
 </body>
 </html>
+
